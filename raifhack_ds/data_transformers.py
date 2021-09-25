@@ -3,8 +3,10 @@ import typing
 import pandas as pd
 import numpy as np
 from sklearn.base import BaseEstimator,TransformerMixin
-
 from sklearn.exceptions import NotFittedError
+
+from raifhack.settings import TARGET
+
 
 class SmoothedTargetEncoding(BaseEstimator,TransformerMixin):
     """Регуляризованный таргет энкодинг.
@@ -20,7 +22,7 @@ class SmoothedTargetEncoding(BaseEstimator,TransformerMixin):
         self.mean_price = None
         self.mean_price_by_cat = {}
         self.encoded_preffix = "encoded_"
-        self.target = 'target'
+        self.target = TARGET
 
     def smoothed_target_encoding(self, y: pd.Series) -> pd.Series:
         """Реализация регуляризованного таргед энкодинга.
@@ -64,7 +66,7 @@ class SmoothedTargetEncoding(BaseEstimator,TransformerMixin):
                 new_col = self.encoded_preffix + col
                 X_cp[new_col] = X_cp[col].map(self.mean_price_by_cat[col]).fillna(self.mean_price)
                 encoded_cols.append(new_col)
-            return X_cp[encoded_cols]
+            return X_cp
         else:
             raise NotFittedError(
                 "This {} instance is not fitted yet. Call 'fit' with appropriate arguments before using this transformer".format(
