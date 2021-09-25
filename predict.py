@@ -1,12 +1,14 @@
 import argparse
 import logging.config
 import pandas as pd
-from raif_hack.features import prepare_categorical
 from traceback import format_exc
 
+import geopy.distance
+
+from raif_hack.features import prepare_categorical, get_number_floors, normalize_floor, is_specific_floor
 from raif_hack.model import BenchmarkModel
 from raif_hack.settings import LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES, \
-    CATEGORICAL_STE_FEATURES
+    CATEGORICAL_STE_FEATURES, CENTER_MSK_LAT, CENTER_MSK_LNG
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -40,12 +42,23 @@ if __name__ == "__main__":
         logger.info('Load test df')
         test_df = pd.read_csv(args['d'])
         logger.info(f'Input shape: {test_df.shape}')
+        test_df = test_df.sort_values('date', ascending=True)
         test_df = prepare_categorical(test_df)
+        # Add new features
+        test_df['n_floors'] = test_df['floor'].apply(lambda x: get_number_floors(x))
+        test_df['norm_floor'] = test_df['floor'].apply(lambda x: normalize_floor(x))
+        test_df['specific_floor'] = test_df['norm_floor'].apply(lambda x: is_specific_floor(x))
+        test_df['low_floor'] = test_df['norm_floor'].apply(lambda x: 1 if x.startswith('-') else 0)
+        test_df['basement'] = test_df['norm_floor'].apply(lambda x: 1 if 'подвал' in x else 0)
+        test_df['basement1'] = test_df['norm_floor'].apply(lambda x: 1 if 'цоколь' in x else 0)
+        test_df['distance_from_moscow_center'] = test_df.apply(
+            lambda x: geopy.distance.distance((x['lat'], x['lng']), (CENTER_MSK_LAT, CENTER_MSK_LNG)).km, axis=1)
 
         logger.info('Load model')
         model = BenchmarkModel.load(args['mp'])
         logger.info('Predict')
-        test_df['per_square_meter_price'] = model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+        test_df['per_square_meter_price'] = model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]) * 0.95
+        test_df = test_df.sort_index()
         logger.info('Save results')
         test_df[['id','per_square_meter_price']].to_csv(args['o'], index=False)
     except Exception as e:

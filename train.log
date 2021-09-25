@@ -1,0 +1,190 @@
+2021-09-24 21:00:23,876 __main__     INFO     START train.py
+2021-09-24 21:00:23,877 __main__     INFO     Load train df
+2021-09-24 21:00:23,906 __main__     INFO     Input shape: (2974, 76)
+2021-09-24 21:00:23,921 __main__     ERROR    Traceback (most recent call last):
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2898, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 101, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1675, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1683, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'per_square_meter_price'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "train.py", line 46, in <module>
+    y_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/pandas/core/frame.py", line 2906, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2900, in get_loc
+    raise KeyError(key) from err
+KeyError: 'per_square_meter_price'
+
+2021-09-24 21:03:56,777 __main__     INFO     START train.py
+2021-09-24 21:03:56,779 __main__     INFO     Load train df
+2021-09-24 21:03:56,808 __main__     INFO     Input shape: (2974, 76)
+2021-09-24 21:03:56,825 __main__     ERROR    Traceback (most recent call last):
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2898, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 101, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1675, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1683, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'per_square_meter_price'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "train.py", line 47, in <module>
+    y_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/pandas/core/frame.py", line 2906, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2900, in get_loc
+    raise KeyError(key) from err
+KeyError: 'per_square_meter_price'
+
+2021-09-24 22:50:15,272 __main__     INFO     START train.py
+2021-09-24 22:50:15,273 __main__     INFO     Load train df
+2021-09-24 22:50:16,778 __main__     INFO     Input shape: (279792, 77)
+2021-09-24 22:50:17,185 __main__     INFO     X_offer (275299, 70)  y_offer (275299,)	X_manual (4493, 70) y_manual (4493,)
+2021-09-24 22:50:17,186 __main__     INFO     Fit model
+2021-09-24 22:50:17,186 raif_hack.model INFO     Fit lightgbm
+2021-09-24 22:51:26,805 raif_hack.model INFO     Find corr coefficient
+2021-09-24 22:51:27,391 raif_hack.model INFO     Corr coef: -0.12
+2021-09-24 22:51:27,391 __main__     INFO     Save model
+2021-09-24 22:52:03,838 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5204271589249925, 'mdape': 0.3125603548666643, 'rmse': 73946.13496006273, 'r2': 0.8172816627975483, 'raif_metric': 3.4943808614617957}
+2021-09-24 22:52:04,392 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.30544381035322893, 'mdape': 0.24759116446089766, 'rmse': 73135.9256925428, 'r2': 0.3308659827460806, 'raif_metric': 2.0449581821903826}
+2021-09-24 22:52:04,392 __main__     INFO     END train.py
+2021-09-25 14:23:39,806 __main__     INFO     START train.py
+2021-09-25 14:23:39,807 __main__     INFO     Load train df
+2021-09-25 14:23:41,320 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 14:24:32,017 __main__     INFO     X_offer (275299, 75)  y_offer (275299,)	X_manual (4493, 75) y_manual (4493,)
+2021-09-25 14:24:32,018 __main__     INFO     Fit model
+2021-09-25 14:24:32,018 raif_hack.model INFO     Fit lightgbm
+2021-09-25 14:24:32,035 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 67, in <module>
+    model.fit(X_offer, y_offer, X_manual, y_manual)
+  File "/Users/elena.devyataykina/PycharmProjects/raifhack/raif_hack/model.py", line 81, in fit
+    self.pipeline.fit(X_offer, y_offer, model__feature_name=[f'{i}' for i in range(70)],model__categorical_feature=['67','68','69'])
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/sklearn/pipeline.py", line 341, in fit
+    Xt = self._fit(X, y, **fit_params_steps)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/sklearn/pipeline.py", line 303, in _fit
+    X, fitted_transformer = fit_transform_one_cached(
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/joblib/memory.py", line 352, in __call__
+    return self.func(*args, **kwargs)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/sklearn/pipeline.py", line 754, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **fit_params)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 505, in fit_transform
+    self._validate_remainder(X)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 332, in _validate_remainder
+    cols.extend(_get_column_indices(X, columns))
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/sklearn/utils/__init__.py", line 398, in _get_column_indices
+    raise ValueError(f"Selected columns, {columns}, are not "
+ValueError: Selected columns, ['region', 'city', 'realty_type', 'specific_floor', 'low_floor', 'basement', 'basement'], are not unique in dataframe
+
+2021-09-25 14:24:52,616 __main__     INFO     START train.py
+2021-09-25 14:24:52,617 __main__     INFO     Load train df
+2021-09-25 14:24:54,159 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 14:25:45,176 __main__     INFO     X_offer (275299, 75)  y_offer (275299,)	X_manual (4493, 75) y_manual (4493,)
+2021-09-25 14:25:45,177 __main__     INFO     Fit model
+2021-09-25 14:25:45,178 raif_hack.model INFO     Fit lightgbm
+2021-09-25 14:25:48,301 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 67, in <module>
+    model.fit(X_offer, y_offer, X_manual, y_manual)
+  File "/Users/elena.devyataykina/PycharmProjects/raifhack/raif_hack/model.py", line 81, in fit
+    self.pipeline.fit(X_offer, y_offer, model__feature_name=[f'{i}' for i in range(70)],model__categorical_feature=['67','68','69'])
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/sklearn/pipeline.py", line 346, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/lightgbm/sklearn.py", line 818, in fit
+    super().fit(X, y, sample_weight=sample_weight, init_score=init_score,
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/lightgbm/sklearn.py", line 683, in fit
+    self._Booster = train(params, train_set,
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/lightgbm/engine.py", line 228, in train
+    booster = Booster(params=params, train_set=train_set)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/lightgbm/basic.py", line 2229, in __init__
+    train_set.construct()
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/lightgbm/basic.py", line 1468, in construct
+    self._lazy_init(self.data, label=self.label,
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/lightgbm/basic.py", line 1298, in _lazy_init
+    return self.set_feature_name(feature_name)
+  File "/Users/elena.devyataykina/opt/anaconda3/envs/raifhack/lib/python3.8/site-packages/lightgbm/basic.py", line 1777, in set_feature_name
+    raise ValueError("Length of feature_name({}) and num_feature({}) don't match"
+ValueError: Length of feature_name(70) and num_feature(75) don't match
+
+2021-09-25 14:27:57,618 __main__     INFO     START train.py
+2021-09-25 14:27:57,618 __main__     INFO     Load train df
+2021-09-25 14:27:59,145 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 14:28:49,633 __main__     INFO     X_offer (275299, 75)  y_offer (275299,)	X_manual (4493, 75) y_manual (4493,)
+2021-09-25 14:28:49,634 __main__     INFO     Fit model
+2021-09-25 14:28:49,634 raif_hack.model INFO     Fit lightgbm
+2021-09-25 14:29:55,711 raif_hack.model INFO     Find corr coefficient
+2021-09-25 14:29:56,403 raif_hack.model INFO     Corr coef: -0.15
+2021-09-25 14:29:56,403 __main__     INFO     Save model
+2021-09-25 14:30:38,397 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5539720933623238, 'mdape': 0.31750534986807166, 'rmse': 73956.54720004869, 'r2': 0.8172302026063605, 'raif_metric': 3.5518317706420035}
+2021-09-25 14:30:39,082 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.29947087204386524, 'mdape': 0.24171855439175338, 'rmse': 72864.75728809363, 'r2': 0.3358187230534131, 'raif_metric': 2.026473600059324}
+2021-09-25 14:30:39,083 __main__     INFO     END train.py
+2021-09-25 14:32:25,669 __main__     INFO     START predict.py
+2021-09-25 14:32:25,670 __main__     INFO     Load test df
+2021-09-25 14:32:25,699 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 14:32:26,265 __main__     INFO     Load model
+2021-09-25 14:32:26,294 __main__     INFO     Predict
+2021-09-25 14:32:26,357 __main__     INFO     Save results
+2021-09-25 14:32:26,369 __main__     INFO     END predict.py
+2021-09-25 14:39:19,853 __main__     INFO     START train.py
+2021-09-25 14:39:19,854 __main__     INFO     Load train df
+2021-09-25 14:39:21,452 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 14:40:11,625 __main__     INFO     X_offer (275299, 75)  y_offer (275299,)	X_manual (4493, 75) y_manual (4493,)
+2021-09-25 14:40:11,626 __main__     INFO     Fit model
+2021-09-25 14:40:11,626 raif_hack.model INFO     Fit lightgbm
+2021-09-25 14:41:12,814 raif_hack.model INFO     Find corr coefficient
+2021-09-25 14:41:13,473 raif_hack.model INFO     Corr coef: -0.15
+2021-09-25 14:41:13,473 __main__     INFO     Save model
+2021-09-25 14:41:56,034 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5539720933623238, 'mdape': 0.31750534986807166, 'rmse': 73956.54720004869, 'r2': 0.8172302026063605, 'raif_metric': 3.5518317706420035}
+2021-09-25 14:41:56,707 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.29947087204386524, 'mdape': 0.24171855439175338, 'rmse': 72864.75728809363, 'r2': 0.3358187230534131, 'raif_metric': 2.026473600059324}
+2021-09-25 14:41:56,707 __main__     INFO     END train.py
+2021-09-25 14:44:59,732 __main__     INFO     START predict.py
+2021-09-25 14:44:59,733 __main__     INFO     Load test df
+2021-09-25 14:44:59,762 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 14:45:00,319 __main__     INFO     Load model
+2021-09-25 14:45:00,348 __main__     INFO     Predict
+2021-09-25 14:45:00,410 __main__     INFO     Save results
+2021-09-25 14:45:00,422 __main__     INFO     END predict.py
+2021-09-25 14:54:57,410 __main__     INFO     START predict.py
+2021-09-25 14:54:57,411 __main__     INFO     Load test df
+2021-09-25 14:54:57,448 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 14:54:58,044 __main__     INFO     Load model
+2021-09-25 14:54:58,076 __main__     INFO     Predict
+2021-09-25 14:54:58,140 __main__     INFO     Save results
+2021-09-25 14:54:58,152 __main__     INFO     END predict.py
+2021-09-25 14:55:04,839 __main__     INFO     START train.py
+2021-09-25 14:55:04,839 __main__     INFO     Load train df
+2021-09-25 14:55:06,485 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 14:56:00,853 __main__     INFO     X_offer (275299, 75)  y_offer (275299,)	X_manual (4493, 75) y_manual (4493,)
+2021-09-25 14:56:00,854 __main__     INFO     Fit model
+2021-09-25 14:56:00,854 raif_hack.model INFO     Fit lightgbm
+2021-09-25 14:57:01,671 raif_hack.model INFO     Find corr coefficient
+2021-09-25 14:57:02,322 raif_hack.model INFO     Corr coef: -0.15
+2021-09-25 14:57:02,322 __main__     INFO     Save model
+2021-09-25 14:57:43,943 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5561693697009877, 'mdape': 0.31819964390063415, 'rmse': 73968.23760113996, 'r2': 0.8171724167526015, 'raif_metric': 3.55436775513693}
+2021-09-25 14:57:44,587 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.30060711979054633, 'mdape': 0.24297194163208305, 'rmse': 73252.87310977632, 'r2': 0.3287243250129712, 'raif_metric': 2.0426418295580953}
+2021-09-25 14:57:44,587 __main__     INFO     END train.py
+2021-09-25 14:58:33,142 __main__     INFO     START train.py
+2021-09-25 14:58:33,142 __main__     INFO     Load train df
+2021-09-25 14:58:35,087 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 14:59:29,651 __main__     INFO     X_offer (275299, 75)  y_offer (275299,)	X_manual (4493, 75) y_manual (4493,)
+2021-09-25 14:59:29,652 __main__     INFO     Fit model
+2021-09-25 14:59:29,652 raif_hack.model INFO     Fit lightgbm
+2021-09-25 15:00:28,894 raif_hack.model INFO     Find corr coefficient
+2021-09-25 15:00:29,541 raif_hack.model INFO     Corr coef: -0.15
+2021-09-25 15:00:29,541 __main__     INFO     Save model
+2021-09-25 15:01:10,707 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5539720933623238, 'mdape': 0.31750534986807166, 'rmse': 73956.54720004869, 'r2': 0.8172302026063605, 'raif_metric': 3.5518317706420035}
+2021-09-25 15:01:11,399 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.29947087204386524, 'mdape': 0.24171855439175338, 'rmse': 72864.75728809363, 'r2': 0.3358187230534131, 'raif_metric': 2.026473600059324}
+2021-09-25 15:01:11,399 __main__     INFO     END train.py
+2021-09-25 15:05:28,830 __main__     INFO     START predict.py
+2021-09-25 15:05:28,831 __main__     INFO     Load test df
+2021-09-25 15:05:28,863 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 15:05:29,419 __main__     INFO     Load model
+2021-09-25 15:05:29,445 __main__     INFO     Predict
+2021-09-25 15:05:29,651 __main__     INFO     Save results
+2021-09-25 15:05:29,662 __main__     INFO     END predict.py

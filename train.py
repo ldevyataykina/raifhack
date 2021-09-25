@@ -3,11 +3,14 @@ import logging.config
 import pandas as pd
 from traceback import format_exc
 
+import geopy.distance
+
 from raif_hack.model import BenchmarkModel
-from raif_hack.settings import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES,CATEGORICAL_STE_FEATURES,TARGET
+from raif_hack.settings import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES, \
+    CATEGORICAL_STE_FEATURES, TARGET, CENTER_MSK_LAT, CENTER_MSK_LNG
 from raif_hack.utils import PriceTypeEnum
 from raif_hack.metrics import metrics_stat
-from raif_hack.features import prepare_categorical
+from raif_hack.features import prepare_categorical, get_number_floors, normalize_floor, is_specific_floor
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -40,8 +43,19 @@ if __name__ == "__main__":
         logger.info('Load train df')
         train_df = pd.read_csv(args['d'])
         logger.info(f'Input shape: {train_df.shape}')
+        # Sort values
+        train_df = train_df.sort_values('date', ascending=True)
         train_df = prepare_categorical(train_df)
-
+        # Add new features
+        train_df['n_floors'] = train_df['floor'].apply(lambda x: get_number_floors(x))
+        train_df['norm_floor'] = train_df['floor'].apply(lambda x: normalize_floor(x))
+        train_df['specific_floor'] = train_df['norm_floor'].apply(lambda x: is_specific_floor(x))
+        train_df['low_floor'] = train_df['norm_floor'].apply(lambda x: 1 if x.startswith('-') else 0)
+        train_df['basement'] = train_df['norm_floor'].apply(lambda x: 1 if 'подвал' in x else 0)
+        train_df['basement1'] = train_df['norm_floor'].apply(lambda x: 1 if 'цоколь' in x else 0)
+        train_df['distance_from_moscow_center'] = train_df.apply(
+            lambda x: geopy.distance.distance((x['lat'], x['lng']), (CENTER_MSK_LAT, CENTER_MSK_LNG)).km, axis=1)
+        # Data preparation
         X_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
         y_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
         X_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
