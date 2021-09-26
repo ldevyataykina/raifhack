@@ -1,5 +1,7 @@
 import pandas as pd
-from raif_hack.settings import SPECIFIC_FLOORS
+import geopy.distance
+
+from raif_hack.settings import SPECIFIC_FLOORS, REG_CENTERS
 from raif_hack.utils import UNKNOWN_VALUE
 
 def prepare_categorical(df: pd.DataFrame) -> pd.DataFrame:
@@ -65,4 +67,12 @@ def is_specific_floor(floor):
         return 1
     else:
         return 0
+    
+def get_distance_to_reg_center(row):
+    coords = REG_CENTERS.get(row['region'])
+    if not coords:
+        return 0
+    return geopy.distance.distance((row['lat'], row['lng']), (coords[0], coords[1])).km
+    
+    
 

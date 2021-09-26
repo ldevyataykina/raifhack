@@ -188,3 +188,135 @@ ValueError: Length of feature_name(70) and num_feature(75) don't match
 2021-09-25 15:05:29,445 __main__     INFO     Predict
 2021-09-25 15:05:29,651 __main__     INFO     Save results
 2021-09-25 15:05:29,662 __main__     INFO     END predict.py
+2021-09-25 18:09:19,959 __main__     INFO     START train.py
+2021-09-25 18:09:19,961 __main__     INFO     Load train df
+2021-09-25 18:09:22,540 __main__     INFO     Input shape: (223833, 78)
+2021-09-25 18:10:54,808 __main__     INFO     X_offer (220113, 76)  y_offer (220113,)	X_manual (3720, 76) y_manual (3720,)
+2021-09-25 18:10:54,809 __main__     INFO     Fit model
+2021-09-25 18:10:54,809 raif_hack.model INFO     Fit lightgbm
+2021-09-25 18:13:40,222 raif_hack.model INFO     Find corr coefficient
+2021-09-25 18:13:41,509 raif_hack.model INFO     Corr coef: -0.14
+2021-09-25 18:13:41,509 __main__     INFO     Save model
+2021-09-25 18:15:11,443 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5366134111021492, 'mdape': 0.3153666102905555, 'rmse': 72373.33979711535, 'r2': 0.8266768136763464, 'raif_metric': 3.5186935951870866}
+2021-09-25 18:15:12,869 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2952126571685423, 'mdape': 0.24468484536420004, 'rmse': 74725.7558181062, 'r2': 0.3012634618815174, 'raif_metric': 2.0356981823669544}
+2021-09-25 18:15:12,869 __main__     INFO     END train.py
+2021-09-25 18:15:21,614 __main__     INFO     START predict.py
+2021-09-25 18:15:21,624 __main__     INFO     Load test df
+2021-09-25 18:15:22,615 __main__     INFO     Input shape: (55959, 78)
+2021-09-25 18:15:47,405 __main__     INFO     Load model
+2021-09-25 18:15:47,523 __main__     INFO     Predict
+2021-09-25 18:15:47,544 __main__     ERROR    Traceback (most recent call last):
+  File "predict.py", line 60, in <module>
+    test_df['per_square_meter_price'] = model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]) * 0.95
+  File "/home/yahabo/venvs/raif/lib/python3.8/site-packages/pandas/core/frame.py", line 2912, in __getitem__
+    indexer = self.loc._get_listlike_indexer(key, axis=1, raise_missing=True)[1]
+  File "/home/yahabo/venvs/raif/lib/python3.8/site-packages/pandas/core/indexing.py", line 1254, in _get_listlike_indexer
+    self._validate_read_indexer(keyarr, indexer, axis, raise_missing=raise_missing)
+  File "/home/yahabo/venvs/raif/lib/python3.8/site-packages/pandas/core/indexing.py", line 1304, in _validate_read_indexer
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['distance_from_city_center'] not in index"
+
+2021-09-25 18:21:03,839 __main__     INFO     START predict.py
+2021-09-25 18:21:03,840 __main__     INFO     Load test df
+2021-09-25 18:21:04,545 __main__     INFO     Input shape: (55959, 78)
+2021-09-25 18:21:34,635 __main__     INFO     Load model
+2021-09-25 18:21:34,772 __main__     INFO     Predict
+2021-09-25 18:21:46,895 __main__     INFO     Save results
+2021-09-25 18:21:47,237 __main__     INFO     END predict.py
+2021-09-25 18:41:35,144 __main__     INFO     START train.py
+2021-09-25 18:41:35,146 __main__     INFO     Load train df
+2021-09-25 18:41:38,848 __main__     INFO     Input shape: (223833, 78)
+2021-09-25 18:44:07,971 __main__     INFO     X_offer (220113, 76)  y_offer (220113,)	X_manual (3720, 76) y_manual (3720,)
+2021-09-25 18:44:07,984 __main__     INFO     Fit model
+2021-09-25 18:44:07,985 raif_hack.model INFO     Fit lightgbm
+2021-09-25 18:46:47,450 raif_hack.model INFO     Find corr coefficient
+2021-09-25 18:46:48,415 raif_hack.model INFO     Corr coef: -0.14
+2021-09-25 18:46:48,416 __main__     INFO     Save model
+2021-09-25 18:47:50,524 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.534225323153888, 'mdape': 0.3153104006531624, 'rmse': 72276.94191597337, 'r2': 0.8271382228315561, 'raif_metric': 3.520571708830829}
+2021-09-25 18:47:51,518 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2969952210813923, 'mdape': 0.24569143032577126, 'rmse': 75104.46323598285, 'r2': 0.29416317253246815, 'raif_metric': 2.057295291528809}
+2021-09-25 18:47:51,518 __main__     INFO     END train.py
+2021-09-25 18:47:58,232 __main__     INFO     START predict.py
+2021-09-25 18:47:58,234 __main__     INFO     Load test df
+2021-09-25 18:47:59,114 __main__     INFO     Input shape: (55959, 78)
+2021-09-25 18:48:35,191 __main__     INFO     Load model
+2021-09-25 18:48:35,279 __main__     INFO     Predict
+2021-09-25 18:48:44,944 __main__     INFO     Save results
+2021-09-25 18:48:45,137 __main__     INFO     END predict.py
+2021-09-25 18:51:21,395 __main__     INFO     START predict.py
+2021-09-25 18:51:21,396 __main__     INFO     Load test df
+2021-09-25 18:51:22,081 __main__     INFO     Input shape: (55959, 78)
+2021-09-25 18:51:56,670 __main__     INFO     Load model
+2021-09-25 18:51:56,764 __main__     INFO     Predict
+2021-09-25 18:52:06,706 __main__     INFO     Save results
+2021-09-25 18:52:06,915 __main__     INFO     END predict.py
+2021-09-25 18:55:54,902 __main__     INFO     START train.py
+2021-09-25 18:55:54,903 __main__     INFO     Load train df
+2021-09-25 18:55:58,526 __main__     INFO     Input shape: (223833, 78)
+2021-09-25 18:58:13,027 __main__     INFO     X_offer (220113, 76)  y_offer (220113,)	X_manual (3720, 76) y_manual (3720,)
+2021-09-25 18:58:13,027 __main__     INFO     Fit model
+2021-09-25 18:58:13,027 raif_hack.model INFO     Fit lightgbm
+2021-09-25 19:00:50,766 raif_hack.model INFO     Find corr coefficient
+2021-09-25 19:00:51,574 raif_hack.model INFO     Corr coef: -0.14
+2021-09-25 19:00:51,574 __main__     INFO     Save model
+2021-09-25 19:00:52,077 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 79, in <module>
+    "importance": model.feature_importances_
+AttributeError: 'BenchmarkModel' object has no attribute 'feature_importances_'
+
+2021-09-25 19:04:19,038 __main__     INFO     START train.py
+2021-09-25 19:04:19,067 __main__     INFO     Load train df
+2021-09-25 19:04:22,153 __main__     INFO     Input shape: (223833, 78)
+2021-09-25 19:06:24,145 __main__     INFO     X_offer (220113, 76)  y_offer (220113,)	X_manual (3720, 76) y_manual (3720,)
+2021-09-25 19:06:24,145 __main__     INFO     Fit model
+2021-09-25 19:06:24,145 raif_hack.model INFO     Fit lightgbm
+2021-09-25 19:08:50,979 raif_hack.model INFO     Find corr coefficient
+2021-09-25 19:08:51,802 raif_hack.model INFO     Corr coef: -0.14
+2021-09-25 19:08:51,802 __main__     INFO     Save model
+2021-09-25 19:09:45,733 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.534225323153888, 'mdape': 0.3153104006531624, 'rmse': 72276.94191597337, 'r2': 0.8271382228315561, 'raif_metric': 3.520571708830829}
+2021-09-25 19:09:46,687 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2969952210813923, 'mdape': 0.24569143032577126, 'rmse': 75104.46323598285, 'r2': 0.29416317253246815, 'raif_metric': 2.057295291528809}
+2021-09-25 19:09:46,687 __main__     INFO     END train.py
+2021-09-25 19:28:10,868 __main__     INFO     START train.py
+2021-09-25 19:28:10,870 __main__     INFO     Load train df
+2021-09-25 19:28:14,283 __main__     INFO     Input shape: (223833, 78)
+2021-09-25 19:30:24,781 __main__     INFO     X_offer (220113, 76)  y_offer (220113,)	X_manual (3720, 76) y_manual (3720,)
+2021-09-25 19:30:24,855 __main__     INFO     Fit model
+2021-09-25 19:30:24,880 raif_hack.model INFO     Fit lightgbm
+2021-09-25 19:33:08,176 raif_hack.model INFO     Find corr coefficient
+2021-09-25 19:33:09,063 raif_hack.model INFO     Corr coef: -0.15
+2021-09-25 19:33:09,063 __main__     INFO     Save model
+2021-09-25 19:34:06,187 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5336218230983676, 'mdape': 0.3146214379349961, 'rmse': 72366.96101867133, 'r2': 0.8267073647462873, 'raif_metric': 3.5176675710175704}
+2021-09-25 19:34:07,151 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2957796875579397, 'mdape': 0.24383337018098916, 'rmse': 75232.32195821941, 'r2': 0.291757877025666, 'raif_metric': 2.0377078122628647}
+2021-09-25 19:34:07,151 __main__     INFO     END train.py
+2021-09-25 19:34:13,536 __main__     INFO     START predict.py
+2021-09-25 19:34:13,576 __main__     INFO     Load test df
+2021-09-25 19:34:14,511 __main__     INFO     Input shape: (55959, 78)
+2021-09-25 19:34:45,250 __main__     INFO     Load model
+2021-09-25 19:34:45,324 __main__     INFO     Predict
+2021-09-25 19:34:52,641 __main__     INFO     Save results
+2021-09-25 19:34:52,819 __main__     INFO     END predict.py
+2021-09-25 19:39:53,790 __main__     INFO     START predict.py
+2021-09-25 19:39:53,792 __main__     INFO     Load test df
+2021-09-25 19:39:54,436 __main__     INFO     Input shape: (55959, 78)
+2021-09-25 19:40:26,016 __main__     INFO     Load model
+2021-09-25 19:40:26,102 __main__     INFO     Predict
+2021-09-25 19:40:34,838 __main__     INFO     Save results
+2021-09-25 19:40:35,041 __main__     INFO     END predict.py
+2021-09-25 19:43:26,797 __main__     INFO     START train.py
+2021-09-25 19:43:26,799 __main__     INFO     Load train df
+2021-09-25 19:43:30,479 __main__     INFO     Input shape: (223833, 78)
+2021-09-25 19:44:44,226 __main__     INFO     X_offer (220113, 75)  y_offer (220113,)	X_manual (3720, 75) y_manual (3720,)
+2021-09-25 19:44:44,278 __main__     INFO     Fit model
+2021-09-25 19:44:44,278 raif_hack.model INFO     Fit lightgbm
+2021-09-25 19:47:25,036 raif_hack.model INFO     Find corr coefficient
+2021-09-25 19:47:26,329 raif_hack.model INFO     Corr coef: -0.14
+2021-09-25 19:47:26,330 __main__     INFO     Save model
+2021-09-25 19:48:26,675 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.532344550347006, 'mdape': 0.3153756179151173, 'rmse': 72429.8774115625, 'r2': 0.8264059098579106, 'raif_metric': 3.5227443934719602}
+2021-09-25 19:48:27,662 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.29841397618200977, 'mdape': 0.24908089245905038, 'rmse': 75000.13158051291, 'r2': 0.2961228423604403, 'raif_metric': 2.067077989943281}
+2021-09-25 19:48:27,662 __main__     INFO     END train.py
+2021-09-25 19:48:40,633 __main__     INFO     START predict.py
+2021-09-25 19:48:40,671 __main__     INFO     Load test df
+2021-09-25 19:48:41,478 __main__     INFO     Input shape: (55959, 78)
+2021-09-25 19:48:58,519 __main__     INFO     Load model
+2021-09-25 19:48:58,601 __main__     INFO     Predict
+2021-09-25 19:49:07,129 __main__     INFO     Save results
+2021-09-25 19:49:07,339 __main__     INFO     END predict.py

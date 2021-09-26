@@ -1,6 +1,7 @@
 import argparse
 import logging.config
 import pandas as pd
+import pickle
 from traceback import format_exc
 
 import geopy.distance
@@ -10,7 +11,7 @@ from raif_hack.settings import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEG
     CATEGORICAL_STE_FEATURES, TARGET, CENTER_MSK_LAT, CENTER_MSK_LNG
 from raif_hack.utils import PriceTypeEnum
 from raif_hack.metrics import metrics_stat
-from raif_hack.features import prepare_categorical, get_number_floors, normalize_floor, is_specific_floor
+from raif_hack.features import prepare_categorical, get_number_floors, normalize_floor, is_specific_floor, get_distance_to_reg_center
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -55,6 +56,10 @@ if __name__ == "__main__":
         train_df['basement1'] = train_df['norm_floor'].apply(lambda x: 1 if 'цоколь' in x else 0)
         train_df['distance_from_moscow_center'] = train_df.apply(
             lambda x: geopy.distance.distance((x['lat'], x['lng']), (CENTER_MSK_LAT, CENTER_MSK_LNG)).km, axis=1)
+        #train_df['distance_from_reg_center'] = train_df.apply(lambda x: get_distance_to_reg_center(x), axis=1)
+        with open('./model/train.pkl', 'wb') as f:
+            pickle.dump(train_df, f, protocol=pickle.HIGHEST_PROTOCOL)
+        
         # Data preparation
         X_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
         y_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
@@ -67,6 +72,14 @@ if __name__ == "__main__":
         model.fit(X_offer, y_offer, X_manual, y_manual)
         logger.info('Save model')
         model.save(args['mp'])
+        
+        
+        feature_importances = pd.DataFrame({
+            "feature": NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES,
+            "importance": model.pipeline['model'].feature_importances_
+        })
+        with open('./model/importances.pkl', 'wb') as f:
+            pickle.dump(feature_importances, f, protocol=pickle.HIGHEST_PROTOCOL)
 
         predictions_offer = model.predict(X_offer)
         metrics = metrics_stat(y_offer.values, predictions_offer/(1+model.corr_coef)) # для обучающей выборки с ценами из объявлений смотрим качество без коэффициента

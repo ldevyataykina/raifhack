@@ -5,7 +5,7 @@ from traceback import format_exc
 
 import geopy.distance
 
-from raif_hack.features import prepare_categorical, get_number_floors, normalize_floor, is_specific_floor
+from raif_hack.features import prepare_categorical, get_number_floors, normalize_floor, is_specific_floor, get_distance_to_reg_center
 from raif_hack.model import BenchmarkModel
 from raif_hack.settings import LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES, \
     CATEGORICAL_STE_FEATURES, CENTER_MSK_LAT, CENTER_MSK_LNG
@@ -53,6 +53,7 @@ if __name__ == "__main__":
         test_df['basement1'] = test_df['norm_floor'].apply(lambda x: 1 if 'цоколь' in x else 0)
         test_df['distance_from_moscow_center'] = test_df.apply(
             lambda x: geopy.distance.distance((x['lat'], x['lng']), (CENTER_MSK_LAT, CENTER_MSK_LNG)).km, axis=1)
+        #test_df['distance_from_reg_center'] = test_df.apply(lambda x: get_distance_to_reg_center(x), axis=1)
 
         logger.info('Load model')
         model = BenchmarkModel.load(args['mp'])

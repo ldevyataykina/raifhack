@@ -1,3 +1,5 @@
+import pickle
+
 TARGET = 'per_square_meter_price'
 # признаки (или набор признаков), для которых применяем smoothed target encoding
 CATEGORICAL_STE_FEATURES = ['region', 'city', 'realty_type', 'specific_floor', 'low_floor', 'basement', 'basement1']
@@ -40,11 +42,14 @@ NUM_FEATURES = ['lat', 'lng', 'osm_amenity_points_in_0.001',
        'reform_house_population_1000', 'reform_house_population_500',
        'reform_mean_floor_count_1000', 'reform_mean_floor_count_500',
        'reform_mean_year_building_1000', 'reform_mean_year_building_500','total_square',
-       'distance_from_moscow_center']
+       'distance_from_moscow_center',] #'distance_from_reg_center']
 
 SPECIFIC_FLOORS = ['цоколь', 'подвал', 'тех', 'мансард', 'антресоль', 'мезонин']
 CENTER_MSK_LAT = 55.751663
 CENTER_MSK_LNG = 37.618937
+
+with open ('./model/region_centers.pickle', 'rb') as f:
+    REG_CENTERS = pickle.load(f)
 
 MODEL_PARAMS = dict(
             n_estimators=2000,
